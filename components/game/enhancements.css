@@ -1,0 +1,234 @@
+.audio-mixer {
+  position: fixed;
+  z-index: 80;
+  right: 24px;
+  top: 102px;
+  width: 238px;
+  color: #eff4df;
+  background: #18231ee8;
+  border: 1px solid #b7d38933;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 11px;
+  backdrop-filter: blur(16px);
+}
+.is-playing .audio-mixer {
+  top: 86px;
+}
+.audio-mixer summary {
+  cursor: pointer;
+  letter-spacing: 2px;
+  font-size: 10px;
+}
+.audio-channel {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 15px;
+}
+.audio-channel button {
+  color: var(--accent);
+  padding: 5px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 17px;
+}
+.audio-channel label {
+  flex: 1;
+}
+.audio-channel input {
+  display: block;
+  width: 100%;
+  height: 15px;
+  margin-top: 5px;
+  accent-color: var(--accent);
+}
+.audio-channel output {
+  width: 31px;
+  color: #cbd5bc;
+  font-variant-numeric: tabular-nums;
+}
+.amethyst-timer {
+  margin-top: 15px;
+  color: #d9b8ff;
+}
+.amethyst-timer > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.amethyst-timer .health-track i {
+  background: #c08aff;
+}
+.odyssey-card {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+  margin: 0 auto 70px;
+  width: min(1200px, 90%);
+  background: #1a251e;
+  border: 1px solid #c5df8e33;
+  color: #f0f4df;
+  text-decoration: none;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.odyssey-card img {
+  width: 46%;
+  max-height: 300px;
+  object-fit: cover;
+}
+.odyssey-card h2 {
+  font-size: clamp(25px, 3vw, 44px);
+  margin: 12px 0;
+}
+.odyssey-card p {
+  color: #b7c3ae;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+.odyssey-card strong {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #d4f86a;
+}
+@media (max-width: 700px) {
+  .audio-mixer {
+    right: 12px;
+    top: 90px;
+    width: 205px;
+  }
+  .odyssey-card {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .odyssey-card img {
+    width: 100%;
+  }
+  .odyssey-card > div {
+    padding: 0 24px 28px;
+  }
+}
+
+.controls-guide {
+  width: min(1200px, 90%);
+  margin: 0 auto 56px;
+  padding-top: 15px;
+}
+.controls-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.controls-heading h2 {
+  margin: 12px 0 0;
+  color: #eff4df;
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 500;
+  letter-spacing: -1.5px;
+}
+.controls-heading p {
+  color: #9ca893;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.controls-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.15fr;
+  border: 1px solid #c5df8e2b;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.controls-card {
+  padding: 28px 24px;
+  background: #182117;
+}
+.controls-card + .controls-card {
+  border-left: 1px solid #c5df8e2b;
+}
+.controls-card > svg {
+  color: var(--accent);
+}
+.controls-card h3 {
+  color: #e5ebda;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 17px 0 24px;
+}
+.controls-card dl {
+  margin: 0;
+}
+.controls-card dl > div + div {
+  margin-top: 19px;
+}
+.controls-card kbd {
+  display: inline-block;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  padding: 5px 8px;
+  color: #d4f3a0;
+  border: 1px solid #b9cf953b;
+  border-radius: 3px;
+  background: #263021;
+}
+.controls-card dd {
+  margin: 7px 0 0;
+  color: #acb8a2;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.survival-card {
+  background: #1b251b;
+}
+.survival-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.survival-card li {
+  color: #acb8a2;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.survival-card li + li {
+  margin-top: 17px;
+}
+.survival-card strong {
+  color: #e1eacb;
+  font-weight: 500;
+}
+@media (max-width: 900px) {
+  .controls-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .survival-card {
+    grid-column: 1 / -1;
+  }
+  .controls-card.survival-card {
+    border-left: 0;
+    border-top: 1px solid #c5df8e2b;
+  }
+  .controls-heading {
+    display: block;
+  }
+  .controls-heading p {
+    margin-top: 15px;
+  }
+}
+@media (max-width: 550px) {
+  .controls-grid {
+    grid-template-columns: 1fr;
+  }
+  .controls-card + .controls-card {
+    border-left: 0;
+    border-top: 1px solid #c5df8e2b;
+  }
+  .controls-card {
+    padding: 24px;
+  }
+}
