@@ -1,0 +1,83 @@
+{
+  "models": [
+    {
+      "name": "LimestoneTower",
+      "triangles": 1628,
+      "dimensions": [
+        15.0,
+        17.0,
+        68.0
+      ]
+    },
+    {
+      "name": "GlassTower",
+      "triangles": 1756,
+      "dimensions": [
+        16.0,
+        19.0,
+        61.599998474121094
+      ]
+    },
+    {
+      "name": "TerraceApartments",
+      "triangles": 10564,
+      "dimensions": [
+        16.0,
+        18.799999237060547,
+        43.900001525878906
+      ]
+    },
+    {
+      "name": "BrickWorks",
+      "triangles": 1564,
+      "dimensions": [
+        17.0,
+        18.850000381469727,
+        36.224998474121094
+      ]
+    },
+    {
+      "name": "LimestoneTower_LOD",
+      "triangles": 476,
+      "dimensions": [
+        15.0,
+        17.0,
+        68.0
+      ]
+    },
+    {
+      "name": "GlassTower_LOD",
+      "triangles": 508,
+      "dimensions": [
+        16.0,
+        19.0,
+        61.599998474121094
+      ]
+    },
+    {
+      "name": "TerraceApartments_LOD",
+      "triangles": 2916,
+      "dimensions": [
+        16.0,
+        18.799999237060547,
+        43.900001525878906
+      ]
+    },
+    {
+      "name": "BrickWorks_LOD",
+      "triangles": 444,
+      "dimensions": [
+        17.0,
+        18.850000381469727,
+        36.224998474121094
+      ]
+    }
+  ],
+  "atlas": [
+    1024,
+    1024
+  ],
+  "materials": 1,
+  "textureMaps": 4,
+  "glbBytes": 2203504
+}

@@ -1,0 +1,12 @@
+{
+  "name": "StreetBlock",
+  "triangles": 1638,
+  "materials": 1,
+  "atlas": [
+    512,
+    512
+  ],
+  "moduleLength": 105,
+  "groundElevation": -40,
+  "glbBytes": 393172
+}

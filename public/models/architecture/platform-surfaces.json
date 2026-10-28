@@ -1,0 +1,20 @@
+{
+  "atlas": [
+    1024,
+    512
+  ],
+  "tileSize": 256,
+  "tileWorldSize": 4,
+  "themes": [
+    "Skyline / roof panels",
+    "Undercity / service grating",
+    "Solar / collector cells",
+    "Gardens / mossy stone",
+    "Neon / signal tiles",
+    "Orbital / alloy plates",
+    "Spire / limestone inlay",
+    "Driftworks / freight tread"
+  ],
+  "bytes": 640048,
+  "materials": 1
+}

@@ -3,8 +3,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   useGLTF,
   useAnimations,
-  Sky,
-  Stars,
+  Environment,
   ContactShadows,
 } from "@react-three/drei";
 import {
@@ -18,6 +17,10 @@ import {
 import * as THREE from "three";
 import { prepareModel } from "./modelUtils";
 import SkyOrbs from "./SkyOrbs";
+import Architecture from "./Architecture";
+import BuildingSurface from "./BuildingSurface";
+import Streets from "./Streets";
+import { CITY_GROUND_Y } from "@/data/city";
 import Combat, {
   ShootingPose,
   createCombatState,
@@ -186,11 +189,21 @@ function Deck({
   });
   return (
     <group ref={ref} position={[p.x, p.y, p.z]}>
-      <Box
-        position={[0, -p.h / 2, 0]}
-        size={[p.w, p.h, p.d]}
-        color={map.concrete}
-      />
+      <Suspense
+        fallback={
+          <Box
+            position={[0, -p.h / 2, 0]}
+            size={[p.w, p.h, p.d]}
+            color={map.concrete}
+          />
+        }
+      >
+        <BuildingSurface
+          position={[0, -p.h / 2, 0]}
+          size={[p.w, p.h, p.d]}
+          mapId={map.id}
+        />
+      </Suspense>
       <Box
         position={[0, -0.12, p.d / 2 + 0.02]}
         size={[p.w, 0.18, 0.06]}
@@ -217,11 +230,22 @@ function Deck({
       )}
       {p.kind !== "beam" && (
         <>
-          <Box
-            position={[0, -p.h - 9, 0]}
-            size={[p.w * 0.38, 18, p.d * 0.5]}
-            color="#687261"
-          />
+          <Suspense
+            fallback={
+              <Box
+                position={[0, -p.h - 9, 0]}
+                size={[p.w * 0.38, 18, p.d * 0.5]}
+                color="#687261"
+              />
+            }
+          >
+            <BuildingSurface
+              position={[0, -p.h - 9, 0]}
+              size={[p.w * 0.38, 18, p.d * 0.5]}
+              mapId={map.id}
+              platform={false}
+            />
+          </Suspense>
           {[-1, 1].map((s) => (
             <Box
               key={s}
@@ -258,73 +282,12 @@ function Deck({
   );
 }
 function City({ map }: { map: MapConfig }) {
-  const buildings = useMemo(
-    () =>
-      Array.from({ length: 156 }, (_, i) => {
-        const random = (n: number) => {
-          const v = Math.sin((i + 1) * n + map.seed) * 43758.54;
-          return v - Math.floor(v);
-        };
-        return {
-          x: (i % 2 ? -1 : 1) * (25 + random(12) * 95),
-          z: 40 - random(42) * 630,
-          h: 15 + random(8) * 66,
-          w: 5 + random(2) * 12,
-          d: 7 + random(7) * 13,
-        };
-      }),
-    [map],
-  );
   return (
     <group>
-      {buildings.map((b, i) => (
-        <group key={i} position={[b.x, b.h / 2 - 40, b.z]}>
-          <Box
-            position={[0, 0, 0]}
-            size={[b.w, b.h, b.d]}
-            color={i % 3 ? map.concrete : "#687565"}
-          />
-          <Box
-            position={[0, b.h / 2 + 0.4, 0]}
-            size={[b.w + 0.7, 0.8, b.d + 0.7]}
-            color="#c4c8b4"
-          />
-          <Box
-            position={[b.w / 2 + 0.03, 0, 0]}
-            size={[0.08, b.h, 0.25]}
-            color={map.color}
-            emissive
-          />
-          {[0, 1, 2, 3].map((n) => (
-            <Box
-              key={n}
-              position={[0, b.h * 0.4 - n * b.h * 0.2, b.d / 2 + 0.03]}
-              size={[b.w * 0.85, 0.25, 0.08]}
-              color={i % 4 === 0 ? map.color : "#535f51"}
-            />
-          ))}
-          {i % 3 === 0 && (
-            <Box
-              position={[b.w * 0.15, b.h / 2 + 2, 0]}
-              size={[b.w * 0.5, 4, b.d * 0.55]}
-              color="#7b8674"
-            />
-          )}
-          {map.id === "04" && (
-            <mesh position={[0, b.h / 2 + 2, 0]}>
-              <icosahedronGeometry args={[b.w * 0.7, 1]} />
-              <meshStandardMaterial color="#527e62" />
-            </mesh>
-          )}
-          {map.id === "03" && (
-            <Box
-              position={[0, b.h / 2 + 1, 0]}
-              size={[b.w * 0.8, 0.3, b.d * 0.8]}
-              color="#253d4a"
-            />
-          )}
-        </group>
-      ))}
+      <Suspense fallback={null}>
+        <Architecture map={map} />
+        <Streets />
+      </Suspense>
       {map.id === "08" &&
         [0, 1, 2].map((i) => (
           <group key={`crane-${i}`} position={[-30 + i * 27, 0, -35 - i * 52]}>
@@ -350,9 +313,12 @@ function City({ map }: { map: MapConfig }) {
             ))}
           </group>
         ))}
-      <mesh position={[0, -52, -60]} rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh
+        position={[0, CITY_GROUND_Y - 0.15, -270]}
+        rotation={[-Math.PI / 2, 0, 0]}
+      >
         <planeGeometry args={[1200, 1200]} />
-        <meshStandardMaterial color={map.sky} roughness={1} />
+        <meshStandardMaterial color="#424844" roughness={1} />
       </mesh>
       {/* Architectural rings create a recognizable landmark in every district. */}
       <group
@@ -1007,13 +973,13 @@ function Scene({ config }: { config: WorldProps }) {
     <>
       <color attach="background" args={[config.map.sky]} />
       <fog attach="fog" args={[config.map.sky, 100, 420]} />
-      <ambientLight intensity={night ? 0.6 : 1.3} />
+      <ambientLight intensity={night ? 0.3 : 0.65} />
       <hemisphereLight
-        args={[night ? "#9eafff" : "#f5f2d9", "#65735d", night ? 0.8 : 2]}
+        args={[night ? "#9eafff" : "#f5f2d9", "#65735d", night ? 0.6 : 1.2]}
       />
       <directionalLight
         position={[50, 80, 30]}
-        intensity={night ? 1.2 : 3}
+        intensity={night ? 1.3 : 2.4}
         castShadow
         shadow-mapSize={[2048, 2048]}
         shadow-camera-left={-65}
@@ -1022,23 +988,14 @@ function Scene({ config }: { config: WorldProps }) {
         shadow-camera-bottom={-65}
         shadow-normalBias={0.05}
       />
-      {night ? (
-        <Stars
-          radius={160}
-          depth={80}
-          count={1200}
-          factor={3}
-          fade
-          speed={0.2}
+      <Suspense fallback={null}>
+        <Environment
+          files="/hdri/nubula.hdr"
+          background
+          backgroundIntensity={1}
+          environmentIntensity={0.9}
         />
-      ) : (
-        <Sky
-          distance={450000}
-          sunPosition={[80, 25, -100]}
-          turbidity={7}
-          rayleigh={0.4}
-        />
-      )}
+      </Suspense>
       <City map={config.map} />
       <Suspense fallback={null}>
         <SkyOrbs map={config.map} timeRef={timeRef} />

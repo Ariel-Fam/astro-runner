@@ -1,0 +1,46 @@
+{
+  "models": [
+    {
+      "name": "LimestoneTower",
+      "triangles": 468,
+      "dimensions": [
+        15.0,
+        17.0,
+        68.0
+      ]
+    },
+    {
+      "name": "GlassTower",
+      "triangles": 492,
+      "dimensions": [
+        16.0,
+        19.0,
+        61.599998474121094
+      ]
+    },
+    {
+      "name": "TerraceApartments",
+      "triangles": 2916,
+      "dimensions": [
+        16.0,
+        18.799999237060547,
+        43.900001525878906
+      ]
+    },
+    {
+      "name": "BrickWorks",
+      "triangles": 444,
+      "dimensions": [
+        17.0,
+        18.850000381469727,
+        36.224998474121094
+      ]
+    }
+  ],
+  "atlas": [
+    1024,
+    1024
+  ],
+  "materials": 1,
+  "glbBytes": 336416
+}
