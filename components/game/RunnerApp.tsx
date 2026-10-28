@@ -333,7 +333,7 @@ export default function RunnerApp() {
                   <br />
                   Find your own way through the world of tomorrow.
                 </p>
-                <div className="hero-actions reveal">
+                <div className="hero-actions mb-10 reveal">
                   <button className="primary" onClick={launch}>
                     ENTER THE CITY <Icon name="arrow" size={22} />
                   </button>
